@@ -33,7 +33,6 @@ In template (directive)
 npm install
 grunt karma:unit
 ```
-
 <br>
 ---
 © 2014 [Maciej Podsiedlak](http://mpodsiedlak.com)
