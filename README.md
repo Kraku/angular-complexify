@@ -28,6 +28,11 @@ In template (directive)
 </p>
 ```
 
+In template (filter using ui-bootstrap progressbar)
+```html
+<progressbar value="password | complexify"></progressbar>
+```
+
 ## Tests
 ```
 npm install
