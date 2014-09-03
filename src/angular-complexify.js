@@ -227,7 +227,7 @@
       }
     ])
     
-    .filter('compexify', ['Complexify', function(Complexify) {
+    .filter('complexify', ['Complexify', function(Complexify) {
       
       return function(password) {
         return Complexify(password).complexity;
