@@ -33,6 +33,14 @@ In template (filter using ui-bootstrap progressbar)
 <progressbar value="password | complexify"></progressbar>
 ```
 
+In template (validation directive)
+```html
+<form name="form">
+  <input name="password" type="password" ng-model="password" complexify-validate="60">
+</form>
+```
+ng-invalid-password-complexity or ng-valid-password-complexity is added as user types. Above example sets 60% complexity as threshold.
+
 ## Tests
 ```
 npm install

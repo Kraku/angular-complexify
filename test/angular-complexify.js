@@ -77,3 +77,83 @@ describe('Complexify directive', function () {
     expect(element.text()).toBe('Fair');
   });
 });
+
+describe('Complexify validation directive', function () {
+  var scope, element, compile;
+
+  beforeEach(module('angular-complexify'));
+
+  beforeEach(inject(function ($rootScope, $compile) {
+    scope = $rootScope.$new();
+    compile = $compile;
+  }));
+
+  it('should start with valid and pristine', function() {
+    element = compile('<form name="form"><input name="password" type="text" ng-model="password" complexify-validate></form>')(scope);
+
+    scope.$digest();
+
+    expect(element.hasClass('ng-pristine')).toBeTruthy();
+    expect(element.hasClass('ng-valid')).toBeTruthy();
+  });
+
+  it('should set ng-invalid-password-complexity when password is not complex enough', function() {
+    element = compile('<form name="form"><input name="password" type="text" ng-model="password" complexify-validate></form>')(scope);
+    scope.$digest();
+
+    scope.form.password.$setViewValue('1234567890');
+    scope.$digest();
+
+    expect(element.hasClass('ng-pristine')).toBeFalsy();
+    expect(element.hasClass('ng-valid')).toBeFalsy();
+
+    expect(element.hasClass('ng-dirty')).toBeTruthy();
+    expect(element.hasClass('ng-invalid')).toBeTruthy();
+    expect(element.hasClass('ng-invalid-password-complexity')).toBeTruthy();
+  });
+
+  it('should remove ng-invalid-password-complexity when password is valid', function() {
+    element = compile('<form name="form"><input name="password" type="text" ng-model="password" complexify-validate></form>')(scope);
+    scope.$digest();
+
+    scope.form.password.$setViewValue('1234567890');
+    scope.$digest();
+
+    expect(element.hasClass('ng-pristine')).toBeFalsy();
+    expect(element.hasClass('ng-valid')).toBeFalsy();
+
+    expect(element.hasClass('ng-dirty')).toBeTruthy();
+    expect(element.hasClass('ng-invalid')).toBeTruthy();
+    expect(element.hasClass('ng-invalid-password-complexity')).toBeTruthy();
+
+    scope.form.password.$setViewValue('1234567890Abdelieaelieaelie)(');
+    scope.$digest();
+
+    expect(element.hasClass('ng-valid')).toBeTruthy();
+    expect(element.hasClass('ng-valid-password-complexity')).toBeTruthy();
+  });
+
+  it('should be able to customize complexity', inject(function(Complexify) {
+    var passwordLessThan40 = 'ABCdefGHI12', passwordMoreThan40 = 'ABCdefGHI123', threshold = 40;
+    element = compile('<form name="form"><input name="password" type="text" ng-model="password" complexify-validate="' + threshold + '"></form>')(scope);
+    scope.$digest();
+
+    scope.form.password.$setViewValue(passwordLessThan40);
+    scope.$digest();
+
+    expect(element.hasClass('ng-pristine')).toBeFalsy();
+    expect(element.hasClass('ng-valid')).toBeFalsy();
+
+    expect(element.hasClass('ng-dirty')).toBeTruthy();
+    expect(element.hasClass('ng-invalid')).toBeTruthy();
+    expect(element.hasClass('ng-invalid-password-complexity')).toBeTruthy();
+    expect(Complexify(passwordLessThan40).complexity).toBeLessThan(threshold);
+
+    scope.form.password.$setViewValue(passwordMoreThan40);
+    scope.$digest();
+
+    expect(element.hasClass('ng-valid')).toBeTruthy();
+    expect(element.hasClass('ng-valid-password-complexity')).toBeTruthy();
+    expect(Complexify(passwordMoreThan40).complexity).toBeGreaterThan(threshold);
+  }));
+});

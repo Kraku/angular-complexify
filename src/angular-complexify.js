@@ -225,6 +225,32 @@
         };
       }
     ])
+
+    .directive('complexifyValidate', ['Complexify', function(Complexify) {
+      var MIN_COMPLEXITY = 49; // 12 chars with Upper, Lower and Number
+      return {
+        require: "ngModel",
+        restrict: 'A',
+        scope: {
+          complexifyValidate: '@'
+        },
+        link: function(scope, elem, attrs, ctrl) {
+          var limit;
+          ctrl.$parsers.unshift(function(viewValue) {
+            limit = scope.complexifyValidate;
+            if (!limit) {
+              limit = MIN_COMPLEXITY;
+            }
+            if (Complexify(viewValue).complexity > limit) {
+              ctrl.$setValidity('password-complexity', true);
+            } else {
+              ctrl.$setValidity('password-complexity', false);
+            }
+            return viewValue;
+          });
+        }
+      };
+    }])
     
     .filter('complexify', ['Complexify', function(Complexify) {
       
