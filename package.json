@@ -1,7 +1,7 @@
 {
   "name": "angular-complexify",
   "description": "AngularJS port of Dan Palmer's jquery.complexify.js",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Maciej Podsiedlak <maciej.podsiedlak@gmail.com>",
   "main": "angular-complexify.js",
   "repository": {
