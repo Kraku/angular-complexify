@@ -187,12 +187,11 @@
         };
       };
 
-
-      this.$get = function(banlist) {
+      this.$get = ['banlist', function(banlist) {
         options.bannedPasswords = banlist.get;
 
         return self.evaluateSecurity;
-      };
+      }];
     })
     .directive('complexify', ['Complexify',
       function(Complexify) {
