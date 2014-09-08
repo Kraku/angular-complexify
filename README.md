@@ -11,14 +11,14 @@ var myApp = angular.module('myApp', [
 ```
 
 ## Usage
-Provider
+##### Provider
 ```js
 myApp.controller('SomeCtrl', ['$scope', 'Complexify', function($scope, Complexify) {
   $scope.complexify = Complexify('somePassword');
 }]);
 ```
 
-Standard directive
+##### Standard directive
 ```html
 <input type="text" ng-model="password">
 
@@ -28,7 +28,7 @@ Standard directive
 </p>
 ```
 
-Validation directive
+##### Validation directive
 ```html
 <form name="form">
   <input name="password" type="password" ng-model="password" complexify-validate="60">
@@ -37,7 +37,7 @@ Validation directive
 
 ng-invalid-password-complexity or ng-valid-password-complexity is added as user types. Above example sets 60% complexity as threshold.
 
-Filter (ui-bootstrap progressbar)
+##### Filter (ui-bootstrap progressbar)
 ```html
 <progressbar value="password | complexify"></progressbar>
 ```
