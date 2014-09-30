@@ -1,5 +1,5 @@
 /**
- * angular-complexify v0.3.3
+ * angular-complexify v0.3.4
  *
  * AngularJS port of Dan Palmer's jquery.complexify.js
  * https://github.com/kraku/angular-complexify
