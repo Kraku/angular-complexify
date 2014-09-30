@@ -3,15 +3,13 @@
 describe('Complexify provider', function() {
   var complexify, complexifyProvider;
 
-
   beforeEach(module('angular-complexify', function(ComplexifyProvider) {
     complexifyProvider = ComplexifyProvider;
   }));
 
   beforeEach(inject(function($injector) {
     complexify = $injector.get('Complexify');
-  }));
-    
+  }));    
 
   it('should be able to update options', function() {
     expect(complexifyProvider.getOptions('minimumChars')).toBe(8);
@@ -38,6 +36,7 @@ describe('Complexify provider', function() {
   });
 
   it('should return evaluate security value', function() {
+    expect(complexifyProvider.evaluateSecurity().complexity).toBe(0);
     expect(complexifyProvider.evaluateSecurity('password').complexity).toBe(0);
     expect(complexifyProvider.evaluateSecurity('321456987').complexity).toBe(17.269388197455342);
     expect(complexifyProvider.evaluateSecurity('abcfoobar').complexity).toBe(24.435724035161112);
@@ -45,8 +44,6 @@ describe('Complexify provider', function() {
     expect(complexifyProvider.evaluateSecurity('123fsd4tSDidUguvI4ebtvew').complexity).toBe(82.54268770090182);
   });
 });
-
-
 
 describe('Complexify directive', function () {
   var scope, element, compile;
@@ -57,7 +54,6 @@ describe('Complexify directive', function () {
     scope = $rootScope.$new();
     compile = $compile;
   }));
-
 
   it('should return percent complexity', function() {
     scope.inputModel = 'abc123bar';
@@ -156,4 +152,18 @@ describe('Complexify validation directive', function () {
     expect(element.hasClass('ng-valid-password-complexity')).toBeTruthy();
     expect(Complexify(passwordMoreThan40).complexity).toBeGreaterThan(threshold);
   }));
+});
+
+describe('Complexify filter', function () {
+  var filter;
+
+  beforeEach(module('angular-complexify'));
+
+  beforeEach(inject(function (complexifyFilter) {
+    filter = complexifyFilter;
+  }));
+
+  it('should be greater than zero', function() {
+    expect(filter('1a2b3c4d5e6f7g8h9i')).toBeGreaterThan(0);
+  });
 });
