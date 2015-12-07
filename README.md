@@ -1,4 +1,4 @@
-Angular-complexify v0.3.4 [![Build Status](https://travis-ci.org/Kraku/angular-complexify.svg?branch=master)](https://travis-ci.org/Kraku/angular-complexify)
+Angular-complexify v0.3.5 [![Build Status](https://travis-ci.org/Kraku/angular-complexify.svg?branch=master)](https://travis-ci.org/Kraku/angular-complexify)
 ===============
 #### password strength validation
 AngularJS port of [jquery.complexify.js](https://github.com/danpalmer/jquery.complexify.js)

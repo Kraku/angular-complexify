@@ -14,7 +14,7 @@ describe('Complexify provider', function() {
   it('should be able to update options', function() {
     expect(complexifyProvider.getOptions('minimumChars')).toBe(8);
     expect(complexifyProvider.getOptions('strengthScaleFactor')).toBe(1);
-    expect(complexifyProvider.getOptions('bannedPasswords').length).toBe(521);
+    expect(complexifyProvider.getOptions('bannedPasswords').length).toBe(882);
 
     complexifyProvider.setOptions('minimumChars', 1);
     complexifyProvider.setOptions('strengthScaleFactor', 2);
@@ -40,7 +40,7 @@ describe('Complexify provider', function() {
     expect(complexifyProvider.evaluateSecurity('password').complexity).toBe(0);
     expect(complexifyProvider.evaluateSecurity('321456987').complexity).toBe(17.269388197455342);
     expect(complexifyProvider.evaluateSecurity('abcfoobar').complexity).toBe(24.435724035161112);
-    expect(complexifyProvider.evaluateSecurity('abc123bar').complexity).toBe(26.87639203842082);
+    expect(complexifyProvider.evaluateSecurity('abc123bar').complexity).toBe(0);
     expect(complexifyProvider.evaluateSecurity('123fsd4tSDidUguvI4ebtvew').complexity).toBe(82.54268770090182);
   });
 });
@@ -61,7 +61,7 @@ describe('Complexify directive', function () {
 
     scope.$digest();
 
-    expect(element.text()).toBe('26');
+    expect(element.text()).toBe('0');
   });
 
   it('should return verbal complexity', function() {
@@ -70,7 +70,7 @@ describe('Complexify directive', function () {
 
     scope.$digest();
 
-    expect(element.text()).toBe('Fair');
+    expect(element.text()).toBe('Weak');
   });
 });
 
@@ -122,7 +122,7 @@ describe('Complexify validation directive', function () {
     expect(element.hasClass('ng-invalid')).toBeTruthy();
     expect(element.hasClass('ng-invalid-password-complexity')).toBeTruthy();
 
-    scope.form.password.$setViewValue('1234567890Abdelieaelieaelie)(');
+    scope.form.password.$setViewValue('1a2b3c4d5e6f7g8h9i0Abdelieaelieaelie)(');
     scope.$digest();
 
     expect(element.hasClass('ng-valid')).toBeTruthy();
@@ -130,7 +130,10 @@ describe('Complexify validation directive', function () {
   });
 
   it('should be able to customize complexity', inject(function(Complexify) {
-    var passwordLessThan40 = 'ABCdefGHI12', passwordMoreThan40 = 'ABCdefGHI123', threshold = 40;
+    var passwordLessThan40 = '3d32J8dh8F',
+        passwordMoreThan40 = '8gD1gf9kDNi0Jf',
+        threshold = 40;
+
     element = compile('<form name="form"><input name="password" type="text" ng-model="password" complexify-validate="' + threshold + '"></form>')(scope);
     scope.$digest();
 
