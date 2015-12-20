@@ -1,14 +1,14 @@
 {
   "name": "angular-complexify",
   "description": "AngularJS port of Dan Palmer's jquery.complexify.js",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "author": "Maciej Podsiedlak <maciej.podsiedlak@gmail.com>",
   "main": "angular-complexify.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/kraku/angular-complexify"
   },
-  "dependencies": {
+  "devDependencies": {
     "grunt-contrib-connect": "0.2.0",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
