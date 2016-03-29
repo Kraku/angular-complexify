@@ -195,8 +195,9 @@
       };
 
       this.$get = ['Banlist', function(Banlist) {
-        options.bannedPasswords = Banlist.get;
-
+        if(!options.bannedPasswords){
+          options.bannedPasswords = Banlist.get;
+        }
         return self.evaluateSecurity;
       }];
     })
