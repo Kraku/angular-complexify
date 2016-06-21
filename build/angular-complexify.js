@@ -1,5 +1,5 @@
 /**
- * angular-complexify v0.3.4
+ * angular-complexify v0.3.7
  *
  * AngularJS port of Dan Palmer's jquery.complexify.js
  * https://github.com/kraku/angular-complexify
@@ -195,7 +195,9 @@
       };
 
       this.$get = ['Banlist', function(Banlist) {
-        options.bannedPasswords = Banlist.get;
+        if (!options.bannedPasswords) {
+          options.bannedPasswords = Banlist.get;
+        }
 
         return self.evaluateSecurity;
       }];
@@ -237,7 +239,7 @@
     .directive('complexifyValidate', ['Complexify', function(Complexify) {
       var MIN_COMPLEXITY = 49; // 12 chars with Upper, Lower and Number
       return {
-        require: "ngModel",
+        require: 'ngModel',
         restrict: 'A',
         scope: {
           complexifyValidate: '@'
