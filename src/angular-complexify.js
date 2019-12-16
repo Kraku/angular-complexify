@@ -167,7 +167,7 @@
         var complexity = 0;
         var valid = false;
 
-        if (typeof password === 'undefined') password = '';
+        if (typeof password === 'undefined' || password === null) password = '';
 
         // Reset complexity to 0 when banned password is found
         if (!self.inBanlist(password)) {
