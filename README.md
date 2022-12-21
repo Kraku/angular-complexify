@@ -48,5 +48,3 @@ npm install
 grunt karma:unit
 ```
 <br>
----
-© 2014 [Maciej Podsiedlak](http://mpodsiedlak.com) (WTFPL v2 licence)
